@@ -34,52 +34,69 @@ cp .env.example .env
 # Run the app
 npm run start:dev
 
-🔐 Authentication
-All protected routes require an Authorization: Bearer <token> header.
 
-📂 API Endpoints
+## 🔐 Authentication
 
-📁 Auth Module
-Method | Endpoint | Description | Protected
-POST | /auth/register | Register new user | ❌
-POST | /auth/login | Login and get JWT token | ❌
-GET | /auth/me | Get current user info | ✅
+All protected routes require an `Authorization: Bearer <token>` header.
 
-🖼️ Photo Module
-Method | Endpoint | Description | Protected
-POST | /photos/upload | Upload a new photo (image + caption) | ✅
-GET | /photos | Get all user-uploaded photos (paginated) | ✅
-GET | /photos/:id | Get a specific photo by ID | ✅
-DELETE | /photos/:id | Delete a photo (only by the owner) | ✅
+---
 
-✅ POST /photos/upload accepts multipart/form-data:
-image: image file
-caption: string
+## 📂 API Endpoints
 
-🛠️ Admin Module
-Method | Endpoint | Description | Protected | Access
-GET | /admin/stats | View platform statistics | ✅ | Admin Only
+### 📁 Auth Module
 
-Sample Stats returned:
+| Method | Endpoint         | Description               | Protected |
+|--------|------------------|---------------------------|-----------|
+| POST   | `/auth/register` | Register new user         | ❌         |
+| POST   | `/auth/login`    | Login and get JWT token   | ❌         |
+| GET    | `/auth/me`       | Get current user info     | ✅         |
 
+---
+
+### 🖼️ Photo Module
+
+| Method | Endpoint          | Description                                | Protected |
+|--------|-------------------|--------------------------------------------|-----------|
+| POST   | `/photos/upload`  | Upload a new photo (image + caption)       | ✅         |
+| GET    | `/photos`         | Get all user-uploaded photos (paginated)   | ✅         |
+| GET    | `/photos/:id`     | Get a specific photo by ID                 | ✅         |
+| DELETE | `/photos/:id`     | Delete a photo (only by the owner)         | ✅         |
+
+> **Note**:  
+> `POST /photos/upload` accepts `multipart/form-data` with fields:  
+> - `image`: image file  
+> - `caption`: string  
+
+---
+
+### 🛠️ Admin Module
+
+| Method | Endpoint       | Description              | Protected | Access     |
+|--------|----------------|--------------------------|-----------|------------|
+| GET    | `/admin/stats` | View platform statistics | ✅         | Admin Only |
+
+#### 📊 Sample Stats Returned
+
+```json
 {
-    "totalUploads": 4,
-    "mostActiveUploader": {
-        "name": "Akshat",
-        "email": "akshat@gmail.com",
-        "uploadCount": 1
-    },
-    "largestPhoto": {
-        "id": 5,
-        "fileName": "file",
-        "fileSize": 22258,
-        "filePath": "https://res.cloudinary.com/difywkjte/image/upload/v1744979325/snapify_photos/qdutlgb8df8r3o2z1kgk.jpg",
-        "caption": "profile photo",
-        "userId": null,
-        "createdAt": "2025-04-18T12:28:46.397Z",
-        "updatedAt": "2025-04-18T12:28:46.397Z"
-    }
+  "totalUploads": 4,
+  "mostActiveUploader": {
+    "name": "Akshat",
+    "email": "akshat@gmail.com",
+    "uploadCount": 1
+  },
+  "largestPhoto": {
+    "id": 5,
+    "fileName": "file",
+    "fileSize": 22258,
+    "filePath": "https://res.cloudinary.com/difywkjte/image/upload/v1744979325/snapify_photos/qdutlgb8df8r3o2z1kgk.jpg",
+    "caption": "profile photo",
+    "userId": null,
+    "createdAt": "2025-04-18T12:28:46.397Z",
+    "updatedAt": "2025-04-18T12:28:46.397Z"
+  }
 }
+
 
 📁 Project Structure
 src/
